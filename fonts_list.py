@@ -36,31 +36,24 @@ class FontLib():
         self.vsb.pack(side="right", fill="y")
         self.canvas.pack(side="left", fill="both", expand=True)
         # canvasにウィジェットを配置
-        self.canvas.create_window((4,4), window=self.frame, anchor="nw")
-        # bind
-        self.frame.bind("<Configure>", self.onFrameConfigure)
-
-    def onFrameConfigure(self, event=None):
-        """
-        canvasを親に持つframeでサイズ変更があった場合にcanvasのscrollregionを更新する
-        これでスクロールバーが動作する
-        frameの<configure>シーケンスとbindして使う
-        """
-        self.canvas.configure(scrollregion=self.canvas.bbox("all"))
+        self.canvas.create_window((0,0), window=self.frame, anchor="nw")
 
     def font_list_by_label(self) -> None:
         """
         1.familiesを対象、ラベルで実装
         """
         for i, font_name in enumerate(self.fonts):
-            # ラベルの作成 フォントはfontオプションで直に指定
-            label = tk.Label(self.frame, text=f"{self.text} {font_name}",
-                             font=(font_name, self.FONT_SIZE))
+            # ラベルの作成 フォントは先にFontオブジェクトを作成してfontオプションで指定
+            font_ = tkinter.font.Font(self.root, family=font_name, size=self.FONT_SIZE)
+            label = tk.Label(self.frame, text=f"{self.text} {font_name}", font=font_)
             # grid
             # 最大行を指定して1列目から配置
-            label.grid(row=i % self.MAX_ROWS, column=i // self.MAX_ROWS, sticky="w")
+            # label.grid(row=i % self.MAX_ROWS, column=i // self.MAX_ROWS, sticky="w")
             # 最大列を指定して1行目から配置
-            # label.grid(row=i // self.MAX_COLUMN, column=i % self.MAX_COLUMN, sticky="w")
+            label.grid(row=i // self.MAX_COLUMN, column=i % self.MAX_COLUMN, sticky="w")
+        # Frameの大きさを確定してCanvasにスクロール範囲を設定
+        self.frame.update_idletasks()
+        self.canvas.config(scrollregion=self.canvas.bbox("all"))
 
     def font_list_radiobutton(self) -> None:
         """
@@ -71,14 +64,14 @@ class FontLib():
         # ScrolledFrameを使うため既にできているroot以下のウィジェットを削除
         for w in self.root.winfo_children():
             w.destroy()
+        
         # ScrolledFrame
-        self.frame = ScrolledFrame(self.root, has_h_bar=True)
+        self.frame = ScrolledFrame(self.root, has_h_bar=True, background="ivory")
         self.var_radio = tk.IntVar(value=0) # self.にしないとマウス移動で全選択になってしまう
         for i, font_name in enumerate(self.fonts):
-            # ラジオボタンの作成 フォントは先にFontオブジェクトを作成してfontオプションで指定
-            font_ = tkinter.font.Font(self.root, family=font_name, size=self.FONT_SIZE)
+            # ラジオボタンの作成 フォントはfontオプションで直に指定
             rb = tk.Radiobutton(self.frame, text=f"{self.text} {font_name}", 
-                                font=font_, variable=self.var_radio, value=i)
+                                font=(font_name, self.FONT_SIZE), variable=self.var_radio, value=i)
             # grid
             # 最大行を指定して1列目から配置
             rb.grid(row=i % self.MAX_ROWS, column=i // self.MAX_ROWS, sticky="w")
@@ -119,10 +112,10 @@ class FontLib():
 if __name__ == '__main__':
     """
     1:familiesを対象、ラベルで実装。
-    2:familiesを対象、ラジオボタンで実装。
+    2:familiesを対象、ラジオボタンで実装。ScrolledFrameを使用
     3:pillowのtruetypeで実装。fontsフォルダを対象。
     """
-    switch = 3
+    switch = 1
     text_ = input("\n表示したい文字を入力してください(何も入力しなければ「sample サンプル」と出ます)\n >")
     font_size = input("フォントサイズを入力してください(何も入力しなければ「14ポイント」で出力します)\n >")
 

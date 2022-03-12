@@ -49,7 +49,7 @@ Switch the "switch" variable in the source code to 1-3 and execute
 
 ## プログラムの説明サイト Program description site
 
-[フォントリストの作り方(スクロールバー付Frame)【Python】 - プログラムでおかえしできるかな](https://juu7g.hatenablog.com/entry/Python/tkinter/scrolled-frame)  
+[スクロールバー付Frameで作るフォント一覧の作り方【Python】 - プログラムでおかえしできるかな](https://juu7g.hatenablog.com/entry/Python/tkinter/scrolled-frame)  
 
 ## 作者 Authors
 juu7g
