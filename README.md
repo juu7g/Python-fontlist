@@ -75,7 +75,7 @@ Tkinterでサポートしているフォントのリストを表示します。
 ## プログラムの説明サイト Program description site
 
 - [スクロールバー付Frameで作るフォント一覧の作り方【Python】 - プログラムでおかえしできるかな](https://juu7g.hatenablog.com/entry/Python/tkinter/scrolled-frame)  
-- [親Frameの幅に合わせてgrid数を決めて作るフォント一覧の作り方【Python】 - プログラムでおかえしできるかな](https://juu7g.hatenablog.com/entry/Python/tkinter/wrapped-grid)
+- [ラップするgrid(wrapped_grid)で作るフォント一覧の作り方【Python】 - プログラムでおかえしできるかな](https://juu7g.hatenablog.com/entry/Python/tkinter/wrapped-grid)
 
 ## 作者 Authors
 juu7g
