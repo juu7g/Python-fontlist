@@ -67,6 +67,7 @@ class FontLib():
         
         # ScrolledFrame
         self.frame = ScrolledFrame(self.root, has_h_bar=True, background="ivory")
+        self.frame.parent_frame.pack(fill="both", expand=True)
         self.var_radio = tk.IntVar(value=0) # self.にしないとマウス移動で全選択になってしまう
         for i, font_name in enumerate(self.fonts):
             # ラジオボタンの作成 フォントはfontオプションで直に指定
@@ -115,7 +116,7 @@ if __name__ == '__main__':
     2:familiesを対象、ラジオボタンで実装。ScrolledFrameを使用
     3:pillowのtruetypeで実装。fontsフォルダを対象。
     """
-    switch = 1
+    switch = 2
     text_ = input("\n表示したい文字を入力してください(何も入力しなければ「sample サンプル」と出ます)\n >")
     font_size = input("フォントサイズを入力してください(何も入力しなければ「14ポイント」で出力します)\n >")
 

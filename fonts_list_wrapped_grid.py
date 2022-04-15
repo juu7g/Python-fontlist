@@ -25,6 +25,7 @@ class FontLib():
         self.FONT_SIZE = font_size
         # scroll付きFrameの作成
         self.frame = ScrolledFrame(self.root, background="lavender", has_h_bar=True)
+        self.frame.parent_frame.pack(fill="both", expand=True)
         # bind wrapped_gridへのbind 親の幅に合わせてgridする
         # frame だと発生しない、canvasだと発生、rootだと発生しまくり
         self.labels = []
